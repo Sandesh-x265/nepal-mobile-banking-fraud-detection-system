@@ -1,0 +1,9 @@
+data:
+  n_transactions: 18000
+  fraud_ratio: 0.14
+  ctgan_augment: true
+  ctgan_samples: 4000
+
+model:
+  test_size: 0.2
+  precision_target: 0.75

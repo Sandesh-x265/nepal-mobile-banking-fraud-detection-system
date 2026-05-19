@@ -1,0 +1,43 @@
+data:
+  random_seed: 42
+  n_customers: 2000
+  n_transactions: 18000
+  fraud_ratio: 0.14
+  ctgan_augment: true
+  ctgan_samples: 4000
+  transaction_start: "2024-01-01"
+  transaction_end: "2024-12-31"
+
+model:
+  random_seed: 42
+  test_size: 0.2
+  primary_metric: "average_precision"
+  precision_target: 0.75
+  classifier:
+    xgboost:
+      n_estimators: 250
+      max_depth: 6
+      learning_rate: 0.08
+      subsample: 0.8
+      colsample_bytree: 0.75
+  imbalanced_methods:
+    - none
+    - smote
+    - smote_tomek
+    - class_weight
+
+api:
+  version: "0.1.0"
+  model_path: "models/final_model.pkl"
+  pipeline_path: "models/pipeline.pkl"
+  threshold_path: "models/threshold.json"
+  metadata_path: "models/metadata.json"
+
+explainability:
+  shap_background_size: 100
+  max_display: 8
+
+docker:
+  api_port: 8000
+  dashboard_port: 8501
+  mlflow_port: 5000

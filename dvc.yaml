@@ -1,0 +1,20 @@
+stages:
+  generate_data:
+    cmd: python generate_data.py
+    deps:
+      - generate_data.py
+      - config.yaml
+    outs:
+      - data/transactions.csv
+
+  train:
+    cmd: python train_pipeline.py
+    deps:
+      - train_pipeline.py
+      - config.yaml
+      - data/transactions.csv
+    outs:
+      - models/final_model.pkl
+      - models/pipeline.pkl
+      - models/threshold.json
+      - models/metadata.json
